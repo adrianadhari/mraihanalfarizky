@@ -28,7 +28,7 @@ const App = () => {
         className="bg-cover bg-no-repeat"
       >
         <div className="flex flex-col items-center justify-center min-h-screen">
-          <p className="text-3xl mt-36 text-center">
+          <p className="text-3xl text-center">
             Undangan <br />
             Syukuran Khitan
           </p>
