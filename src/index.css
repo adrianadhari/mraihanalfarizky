@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Fakodi';
+    src: url('Fakodi.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
