@@ -4,18 +4,22 @@ const App = () => {
   return (
     <>
       <div
-        style={{ backgroundImage: "url('backgroundd.jpg')" }}
-        className="bg-cover bg-no-repeat max-w-full flex flex-col gap-3 items-center justify-center min-h-screen"
+        style={{ backgroundImage: "url('background.png')" }}
+        className="bg-cover bg-no-repeat"
       >
-        <p className="text-4xl ">
-          Undangan <br />
-          Syukuran Khitan
-        </p>
-        <div className="px-20 w-full">
-          <img src="hero.png" className="w-full" />
+        <div className="flex flex-col items-center justify-center min-h-screen">
+          <p className="text-3xl mt-36 text-center">
+            Undangan <br />
+            Syukuran Khitan
+          </p>
+          <div className="px-20 my-6 w-full">
+            <img src="hero.png" className="w-full" />
+          </div>
+          <p className="text-xl text-center">Muhammad Raihan Alfarizky</p>
         </div>
-        <p className="text-4xl ">Muhammad Raihan Alfarizky</p>
       </div>
+
+
 
       <div className="container mx-auto px-4">
         <div className="text-center">
@@ -152,9 +156,9 @@ const App = () => {
           <h2 className="text-3xl font-bold">Doa dan Ucapan</h2>
         </div>
         <div className="border-2 shadow p-6 flex flex-col items-center">
-          <p className="font-medium">Adrian - Bogor</p>
+          <p className="font-medium">adri - bogor</p>
           <div className="border w-11/12"></div>
-          <p>Selamat!!</p>
+          <p>selamat</p>
           <p className="text-center">Rabu, 14 Agustus 2024 20:00 WIB</p>
         </div>
       </div>
