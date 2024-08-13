@@ -1,8 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 function Countdown() {
-  const targetDate = new Date('2024-08-20T01:00:00Z'); // 08:00 WIB (WIB = UTC+7, sehingga diatur ke 01:00 UTC)
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const targetDate = new Date("2024-08-20T01:00:00Z"); // 08:00 WIB (WIB = UTC+7, sehingga diatur ke 01:00 UTC)
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -25,13 +30,11 @@ function Countdown() {
   }, [targetDate]);
 
   return (
-    <div className="text-center p-5">
-      <div className="text-2xl">
-        <span>{timeLeft.days} hari </span>
-        <span>{timeLeft.hours} jam </span>
-        <span>{timeLeft.minutes} menit </span>
-        <span>{timeLeft.seconds} detik </span>
-      </div>
+    <div>
+      <span className="font-bold">{timeLeft.days} <span className="font-normal">hari</span> </span>
+      <span className="font-bold">{timeLeft.hours} <span className="font-normal">jam</span> </span>
+      <span className="font-bold">{timeLeft.minutes} <span className="font-normal">menit</span> </span>
+      <span className="font-bold">{timeLeft.seconds} <span className="font-normal">detik</span> </span>
     </div>
   );
 }

@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        fakodi: ['Fakodi', 'sans-serif'],
+        sans: ['Poppins', 'sans-serif'],
+        fakodi: ['Fakodi', 'sans-serif']
       }
     },
   },

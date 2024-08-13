@@ -15,58 +15,70 @@ const App = () => {
           playPromise
             .then(() => {
               // Musik mulai diputar
-              window.removeEventListener('scroll', handleScroll); // Hapus event listener setelah musik diputar
+              window.removeEventListener("scroll", handleScroll); // Hapus event listener setelah musik diputar
             })
-            .catch(error => {
-              console.log('Autoplay diblokir oleh browser:', error);
+            .catch((error) => {
+              console.log("Autoplay diblokir oleh browser:", error);
             });
         }
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll); // Hapus event listener saat komponen di-unmount
+      window.removeEventListener("scroll", handleScroll); // Hapus event listener saat komponen di-unmount
     };
   }, []);
+
+  const copyText = () => {
+    navigator.clipboard.writeText("1239228298");
+  };
   return (
     <>
       <audio ref={audioRef} src="deenassalam.mp3" loop />
+
+      {/* Hero */}
       <div
         style={{ backgroundImage: "url('background.png')" }}
         className="bg-cover bg-no-repeat"
       >
         <div className="flex flex-col items-center justify-center min-h-screen">
-          <p className="text-3xl text-center">
-            Undangan <br />
+          <p className="text-3xl text-center text-[#B0835C] font-medium">
+            <span className="font-fakodi">Undangan</span> <br />
             Syukuran Khitan
           </p>
           <div className="px-20 my-6 w-full">
             <img src="hero.png" className="w-full" />
           </div>
-          <p className="text-xl text-center">Muhammad Raihan Alfarizky</p>
+          <p className="text-base text-[#B0835C] font-medium  text-center">
+            Muhammad Raihan Alfarizky
+          </p>
         </div>
       </div>
+      {/* Hero */}
 
-      <div className="container mx-auto px-4 py-20">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold mb-3">Assalamualaikum Wr. Wb.</h2>
-          <p className="mb-3">
+      <div className="container mx-auto px-4 py-10">
+        <div className="text-center space-y-4 mb-10">
+          <h2 className="text-3xl font-bold ">Assalamualaikum Wr. Wb.</h2>
+          <p>
             Dengan Rahmat Allah yang Maha Kuasa Insha Allah kami akan
             melangsungkan Syukuran Khitan
           </p>
           <Countdown />
         </div>
 
-        <div className="p-6 shadow border-2 text-center flex flex-col items-center justify-center gap-3">
+        {/* Pembukaan */}
+        <div className="p-6 shadow border rounded-xl text-center flex flex-col items-center justify-center space-y-4 mb-20">
           <img src="hero.png" className="w-2/4" />
-          <p className="text-xl font-semibold">Muhammad Raihan Alfarizky</p>
-          <p>
-            Putra dari <span className="font-semibold">Bpk. Endra</span> dan{" "}
-            <span className="font-semibold">Ibu Kiki</span>
-          </p>
-          <p className="text-justify">
+          <div>
+            <p className="text-lg font-semibold">Muhammad Raihan Alfarizky</p>
+            <p className="text-base">
+              Putra dari <span className="font-semibold">Bpk. Endra</span> dan{" "}
+              <span className="font-semibold">Ibu Kiki</span>
+            </p>
+          </div>
+          <p className="text-justify text-sm leading-relaxed">
             Muhammad Raihan Alfarizky merupakan anak kedua kami akan segera
             melaksanakan khitan. Maka dari itu, kami ingin mengadakan syukuran
             atas acara tersebut dengan tujuan memanjatkan rasa terima kasih kami
@@ -74,35 +86,47 @@ const App = () => {
             anak yang bermanfaat bagi dirinya, agama, dan bangsa Indonesia.
           </p>
         </div>
+        {/* Pembukaan */}
 
-        <div className="mt-10 text-center space-y-2 mb-5">
-          <h2 className="text-3xl font-bold">Undangan dan Acara</h2>
-          <p>Bahagia rasanya apabila anda berkenan hadir dan memberikan doa</p>
+        {/* Tempat dan Waktu */}
+        <div className="mb-20">
+          <div className="text-center space-y-2 mb-5">
+            <h2 className="text-3xl font-bold">Tempat dan Waktu</h2>
+            <p>
+              Bahagia rasanya apabila anda berkenan hadir dan memberikan doa
+            </p>
+          </div>
+          <div className="text-center p-6 shadow border rounded-xl flex flex-col items-center space-y-4">
+            <div>
+              <p className="text-xl font-semibold">Selasa, 20 Agustus 2024</p>
+              <p className="font-semibold text-xl">08:00 s/d selesai</p>
+            </div>
+            <p className="text-sm">
+              Kp. Parung Aleng Tegal RT.001/RW.003 Desa Cikeas Kec. Sukaraja
+              Kab. Bogor | Patokan Seberang Indomaret
+            </p>
+          </div>
         </div>
-        <div className="border-2 shadow p-6 flex flex-col items-center">
-          <p className="font-medium">Khitanan dan Syukuran</p>
-          <div className="border w-11/12"></div>
-          <p className="font-bold text-2xl">08:00 - selesai</p>
-          <p>Selasa, 20 Agustus 2024</p>
-          <p className="text-center">
-            Kp. Parung Aleng Tegal RT.001/RW.003 Desa Cikeas Kec. Sukaraja Kab.
-            Bogor | Patokan Seberang Indomaret
-          </p>
-        </div>
+        {/* Tempat dan Waktu */}
 
-        <div className="mt-10 text-center mb-5">
-          <h2 className="text-3xl font-bold">Peta Lokasi</h2>
-          <p className="mb-5">
-            Anda dapat menuju lokasi acara kami dengan bantuan peta dibawah ini.
-            Atau klik tombol di bawah ini
-          </p>
-          <a
-            href="https://maps.app.goo.gl/wc2uYQHZhuQfAvk69"
-            target="_blank"
-            className="p-3 text-white bg-[#ECB888]"
-          >
-            Buka Di Google Maps
-          </a>
+        {/* Peta Lokasi */}
+        <div className="text-center mb-20">
+          <div className="space-y-2 mb-5">
+            <h2 className="text-3xl font-bold">Peta Lokasi</h2>
+            <p>
+              Anda dapat menuju lokasi acara kami dengan bantuan peta dibawah
+              ini. Atau klik tombol di bawah ini.
+            </p>
+          </div>
+          <div>
+            <a
+              href="https://maps.app.goo.gl/wc2uYQHZhuQfAvk69"
+              target="_blank"
+              className="p-3 text-white bg-[#ed9a4d]"
+            >
+              Buka Di Google Maps
+            </a>
+          </div>
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d247.72121065111395!2d106.84927083829474!3d-6.579664293553205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sid!4v1723535054999!5m2!1sen!2sid"
             width="330"
@@ -113,36 +137,50 @@ const App = () => {
             referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
+        {/* Peta Lokasi */}
 
-        <div className="mt-10 text-center mb-5">
-          <h2 className="text-3xl font-bold">Kado Khitan</h2>
-          <p className="mb-5">
-            Jika teman-teman ada yang berkenan untuk mengirimkan tanda kasih
-            kepada anak kami Raihan, silakan kirim melalui rekening: Bank
-            Permata atas nama RIZKI SEPTIANI
-          </p>
-          <img src="permata-bank.jpg" alt="" />
-          <div>
-            <p className="font-medium">Nama Bank</p>
-            <p>Permata</p>
+        {/* Kado */}
+        <div className="text-center mb-20">
+          <div className="space-y-2 mb-5">
+            <h2 className="text-3xl font-bold">Kado Khitan</h2>
+            <p>
+              Jika teman-teman ada yang berkenan untuk mengirimkan tanda kasih
+              kepada anak kami Raihan, silakan kirim melalui rekening dibawah
+              ini:
+            </p>
           </div>
-          <div>
-            <p className="font-medium">Nomor Rekening</p>
-            <p>1239228298 a/n RIZKI SEPTIANI</p>
+          <div className="p-6 rounded-xl border shadow space-y-4 mb-7">
+            <img src="permata-bank.jpg" alt="" className="w-full" />
+            <p className="font-semibold text-lg">
+              1239228298 a/n RIZKI SEPTIANI
+            </p>
+            <button
+              onClick={copyText}
+              className="p-3 bg-[#ed9a4d] text-white focus:bg-[#d9a571]"
+            >
+              Salin Nomor Rekening
+            </button>
           </div>
           <p>
             Atau jika berkenan mengirimkan hadiah berupa kado fisik, anda dapat
-            mengirimkannya pada alamat rumah kami di Kp. Parung Aleng Tegal
-            RT.001/RW.003 Desa Cikeas Kec. Sukaraja Kab. Bogor | Patokan
-            Seberang Indomare
+            mengirimkannya pada alamat rumah kami di{" "}
+            <span className="font-semibold">
+              Kp. Parung Aleng Tegal RT.001/RW.003 Desa Cikeas Kec. Sukaraja
+              Kab. Bogor | Patokan Seberang Indomaret
+            </span>
           </p>
         </div>
+        {/* Kado */}
 
-        <div className="mt-10 text-center mb-5">
-          <h2 className="text-3xl font-bold">Doa dan Ucapan</h2>
-          <p className="mb-5">
-            Tuliskan sesuatu ucapan berupa harapan ataupun doa
-          </p>
+        {/* Doa dan Ucapan */}
+        <div className="text-center mb-20">
+          <div className="space-y-2 mb-5">
+            <h2 className="text-3xl font-bold">Doa dan Ucapan</h2>
+            <p className="mb-5">
+              Tuliskan sesuatu ucapan berupa harapan ataupun doa
+            </p>
+          </div>
+
           <div>
             <form action="" method="POST">
               <div className="flex flex-col space-y-4 items-center ">
@@ -152,7 +190,7 @@ const App = () => {
                   id="nama"
                   placeholder="Tulis nama anda"
                   required
-                  className="w-full border rounded-xl p-3"
+                  className="w-full border rounded-lg p-3"
                 />
                 <input
                   type="text"
@@ -160,18 +198,18 @@ const App = () => {
                   id="alamat"
                   placeholder="Tulis alamat tinggal anda"
                   required
-                  className="w-full border rounded-xl p-3"
+                  className="w-full border rounded-lg p-3"
                 />
                 <textarea
                   name="pesan"
                   id="pesan"
                   placeholder="Tuliskan ucapan atau doa"
                   required
-                  className="w-full border rounded-xl p-3"
+                  className="w-full border rounded-lg p-3"
                 ></textarea>
                 <button
                   type="submit"
-                  className="text-white bg w-full p-3 my-3 bg-[#ECB888]"
+                  className="text-white w-full p-3 my-3 rounded-lg bg-[#ed9a4d]"
                 >
                   KIRIM
                 </button>
@@ -179,14 +217,15 @@ const App = () => {
             </form>
           </div>
         </div>
+        {/* Doa dan Ucapan */}
 
-        <div className="mt-10 text-center mb-5">
+        <div className="text-center mb-5">
           <h2 className="text-3xl font-bold">Doa dan Ucapan</h2>
         </div>
-        <div className="border-2 shadow p-6 flex flex-col items-center">
-          <p className="font-medium">adri - bogor</p>
+        <div className="border shadow p-6 rounded-xl flex flex-col items-center space-y-2">
+          <p className="font-semibold">adri - bogor</p>
           <div className="border w-11/12"></div>
-          <p>selamat</p>
+          <p>semoga lancar</p>
           <p className="text-center">Rabu, 14 Agustus 2024 20:00 WIB</p>
         </div>
       </div>
