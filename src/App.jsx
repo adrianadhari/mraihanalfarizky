@@ -1,8 +1,28 @@
+import { useRef } from "react";
 import Countdown from "./Countdown";
+import { useEffect } from "react";
 
 const App = () => {
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    // Memulai pemutaran musik saat komponen dimount
+    const audio = audioRef.current;
+    const playPromise = audio.play();
+
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          // Musik mulai diputar secara otomatis
+        })
+        .catch(error => {
+          console.log('Autoplay diblokir oleh browser:', error);
+        });
+    }
+  }, []);
   return (
     <>
+      <audio ref={audioRef} src="deenassalam.mp3" loop />
       <div
         style={{ backgroundImage: "url('background.png')" }}
         className="bg-cover bg-no-repeat"
@@ -18,8 +38,6 @@ const App = () => {
           <p className="text-xl text-center">Muhammad Raihan Alfarizky</p>
         </div>
       </div>
-
-
 
       <div className="container mx-auto px-4">
         <div className="text-center">
@@ -80,7 +98,7 @@ const App = () => {
             width="330"
             height="600"
             className="border-0 mx-auto my-10"
-            allowfullscreen=""
+            allowFullScreen=""
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
