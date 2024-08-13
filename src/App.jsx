@@ -6,19 +6,29 @@ const App = () => {
   const audioRef = useRef(null);
 
   useEffect(() => {
-    // Memulai pemutaran musik saat komponen dimount
-    const audio = audioRef.current;
-    const playPromise = audio.play();
+    const handleScroll = () => {
+      const audio = audioRef.current;
+      if (audio && audio.paused) {
+        const playPromise = audio.play();
 
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          // Musik mulai diputar secara otomatis
-        })
-        .catch(error => {
-          console.log('Autoplay diblokir oleh browser:', error);
-        });
-    }
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              // Musik mulai diputar
+              window.removeEventListener('scroll', handleScroll); // Hapus event listener setelah musik diputar
+            })
+            .catch(error => {
+              console.log('Autoplay diblokir oleh browser:', error);
+            });
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll); // Hapus event listener saat komponen di-unmount
+    };
   }, []);
   return (
     <>
