@@ -4,6 +4,28 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 const App = () => {
+  const [messages, setMessages] = useState([]);
+
+  const fetchMessages = async () => {
+    try {
+      const response = await fetch(
+        "https://cendekiapos.adrianadhari.my.id/api/messages"
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setMessages(data);
+      } else {
+        console.error("Terjadi kesalahan saat mengambil data");
+      }
+    } catch (error) {
+      console.error("Kesalahan:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchMessages();
+  }, []);
+
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -65,8 +87,13 @@ const App = () => {
       );
 
       if (response.ok) {
-        const data = await response.json();
-        console.log(data.message); // Pesan berhasil dikirim!
+        // Refresh messages after successful submission
+        fetchMessages();
+        setFormData({
+          nama: "",
+          alamat: "",
+          pesan: "",
+        });
       } else {
         console.error("Terjadi kesalahan saat mengirim pesan");
       }
@@ -263,15 +290,30 @@ const App = () => {
         </div>
         {/* Doa dan Ucapan */}
 
-        {/* <div className="text-center mb-5">
-          <h2 className="text-3xl font-bold">Doa dan Ucapan</h2>
-        </div>
-        <div className="border shadow p-6 rounded-xl flex flex-col items-center space-y-2">
-          <p className="font-semibold">adri - bogor</p>
-          <div className="border w-11/12"></div>
-          <p>semoga lancar</p>
-          <p className="text-center">Rabu, 14 Agustus 2024 20:00 WIB</p>
-        </div> */}
+        {messages.map((message) => (
+          <div
+            key={message.id}
+            className="border shadow p-6 rounded-xl flex flex-col items-center space-y-2 mb-10"
+          >
+            <p className="font-semibold">
+              {message.nama} - {message.alamat}
+            </p>
+            <div className="border w-11/12"></div>
+            <p>{message.pesan}</p>
+            <p className="text-center">
+              {new Date(message.created_at).toLocaleString("id-ID", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+                hour12: false,
+              })}{" "}
+              WIB
+            </p>
+          </div>
+        ))}
       </div>
     </>
   );
