@@ -223,9 +223,10 @@ const App = () => {
           </div>
 
           <div>
-            <form method="POST">
+            <form onSubmit={handleSubmit} method="POST">
               <div className="flex flex-col space-y-4 items-center ">
                 <input
+                  name="nama"
                   type="text"
                   placeholder="Tulis nama anda"
                   required
@@ -234,6 +235,7 @@ const App = () => {
                   onChange={handleChange}
                 />
                 <input
+                  name="alamat"
                   type="text"
                   placeholder="Tulis alamat tinggal anda"
                   required
@@ -242,6 +244,7 @@ const App = () => {
                   onChange={handleChange}
                 />
                 <textarea
+                  name="pesan"
                   placeholder="Tuliskan ucapan atau doa"
                   required
                   className="w-full border rounded-lg p-3"
