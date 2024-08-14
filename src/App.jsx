@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import Countdown from "./Countdown";
 import { useEffect } from "react";
+import { useState } from "react";
 
 const App = () => {
   const audioRef = useRef(null);
@@ -34,6 +35,46 @@ const App = () => {
   const copyText = () => {
     navigator.clipboard.writeText("1239228298");
   };
+
+  const [formData, setFormData] = useState({
+    nama: "",
+    alamat: "",
+    pesan: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(
+        "https://cendekiapos.adrianadhari.my.id/api/send-message",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data.message); // Pesan berhasil dikirim!
+      } else {
+        console.error("Terjadi kesalahan saat mengirim pesan");
+      }
+    } catch (error) {
+      console.error("Kesalahan:", error);
+    }
+  };
+
   return (
     <>
       <audio ref={audioRef} src="deenassalam.mp3" loop />
@@ -182,30 +223,30 @@ const App = () => {
           </div>
 
           <div>
-            <form action="" method="POST">
+            <form method="POST">
               <div className="flex flex-col space-y-4 items-center ">
                 <input
                   type="text"
-                  name="nama"
-                  id="nama"
                   placeholder="Tulis nama anda"
                   required
                   className="w-full border rounded-lg p-3"
+                  value={formData.nama}
+                  onChange={handleChange}
                 />
                 <input
                   type="text"
-                  name="alamat"
-                  id="alamat"
                   placeholder="Tulis alamat tinggal anda"
                   required
                   className="w-full border rounded-lg p-3"
+                  value={formData.alamat}
+                  onChange={handleChange}
                 />
                 <textarea
-                  name="pesan"
-                  id="pesan"
                   placeholder="Tuliskan ucapan atau doa"
                   required
                   className="w-full border rounded-lg p-3"
+                  value={formData.pesan}
+                  onChange={handleChange}
                 ></textarea>
                 <button
                   type="submit"
@@ -219,7 +260,7 @@ const App = () => {
         </div>
         {/* Doa dan Ucapan */}
 
-        <div className="text-center mb-5">
+        {/* <div className="text-center mb-5">
           <h2 className="text-3xl font-bold">Doa dan Ucapan</h2>
         </div>
         <div className="border shadow p-6 rounded-xl flex flex-col items-center space-y-2">
@@ -227,7 +268,7 @@ const App = () => {
           <div className="border w-11/12"></div>
           <p>semoga lancar</p>
           <p className="text-center">Rabu, 14 Agustus 2024 20:00 WIB</p>
-        </div>
+        </div> */}
       </div>
     </>
   );
